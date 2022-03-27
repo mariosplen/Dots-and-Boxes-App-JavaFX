@@ -17,14 +17,12 @@ public class Main extends Application {
 
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
 //        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
 
 
-        GameStart game = new GameStart(3, List.of(new String[]{"Marios", "Kostas"}));
+        Game game = new Game(2, 4, List.of(new String[]{"Marios", "John"}));
+        GameGUI gameGUI = new GameGUI(game);
 
-        Scene scene = new Scene(game.getBoard(), 800, 800);
+        Scene scene = new Scene(gameGUI.getBoard(), 800, 800);
 
         stage.setScene(scene);
         stage.show();

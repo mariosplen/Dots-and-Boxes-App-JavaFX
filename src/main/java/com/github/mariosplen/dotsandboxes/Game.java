@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Game {
+    private final int rows;
+    private final int cols;
+
+
     private final Dot gridLowerBound;
     private final Dot gridUpperBound;
     private final List<List<Dot>> markedLines = new ArrayList<>();
@@ -25,12 +29,22 @@ public class Game {
         if (null == players || players.isEmpty() || players.size() < 2)
             throw new IllegalArgumentException("Please specify players");
 
+        this.rows = rows;
+        this.cols = cols;
         this.players = players;
         this.gridLowerBound = new Dot(0, 0);
         this.gridUpperBound = new Dot(rows, cols);
         this.nextPlayer = 0;
         this.possibleBoxesCount = possibleBoxes(rows, cols).size();
         this.scores = initializeScoresToZero(players);
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
     }
 
     private Map<String, Set<Box>> initializeScoresToZero(List<String> players) {
