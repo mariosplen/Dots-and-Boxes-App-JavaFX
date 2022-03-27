@@ -3,33 +3,20 @@ package com.github.mariosplen.dotsandboxes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
-public class Box {
-
-    private final Dot bottomLeft;
-    private final Dot topLeft;
-    private final Dot topRight;
-    private final Dot bottomRight;
-
-    public Box(Dot bottomLeft, Dot topLeft, Dot topRight, Dot bottomRight) {
-        this.bottomLeft = bottomLeft;
-        this.topLeft = topLeft;
-        this.topRight = topRight;
-        this.bottomRight = bottomRight;
-    }
+public record Box(Dot bottomLeft, Dot topLeft,
+                  Dot topRight, Dot bottomRight) {
 
     public boolean canBeCreatedUsing(List<List<Dot>> lines) {
         List<List<Dot>> possibleBoxLines = lines();
         possibleBoxLines.addAll(reverseLines());
 
-        if (numberOfBoxLinesIn(lines, possibleBoxLines) != 4)
-            return false;
-
-        return true;
+        return numberOfBoxLinesIn(lines, possibleBoxLines) == 4;
     }
 
     public List<List<Dot>> lines() {
-        return new ArrayList<List<Dot>>() {
+        return new ArrayList<>() {
             {
                 add(Arrays.asList(bottomLeft, topLeft));
                 add(Arrays.asList(topLeft, topRight));
@@ -40,7 +27,7 @@ public class Box {
     }
 
     private List<List<Dot>> reverseLines() {
-        return new ArrayList<List<Dot>>() {
+        return new ArrayList<>() {
             {
                 add(Arrays.asList(topLeft, bottomLeft));
                 add(Arrays.asList(topRight, topLeft));
@@ -53,13 +40,12 @@ public class Box {
 
     private long numberOfBoxLinesIn(List<List<Dot>> lines, List<List<Dot>> boxLines) {
         return boxLines.stream()
-                .filter(boxLine -> lines.contains(boxLine))
+                .filter(lines::contains)
                 .count();
     }
 
     public boolean isWithin(Dot lowerBound, Dot upperBound) {
-        return Arrays.asList(bottomLeft, topLeft, topRight, bottomRight)
-                .stream()
+        return Stream.of(bottomLeft, topLeft, topRight, bottomRight)
                 .allMatch(dot -> dot.isWithin(lowerBound, upperBound));
     }
 

@@ -1,13 +1,6 @@
 package com.github.mariosplen.dotsandboxes;
 
-public class Dot {
-    private final double x;
-    private final double y;
-
-    public Dot(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
+public record Dot(double x, double y) {
 
     @Override
     public boolean equals(Object o) {
@@ -17,9 +10,7 @@ public class Dot {
         Dot dot = (Dot) o;
 
         if (x != dot.x) return false;
-        if (y != dot.y) return false;
-
-        return true;
+        return y == dot.y;
     }
 
     @Override
@@ -65,26 +56,10 @@ public class Dot {
     public boolean isWithin(Dot lowerBound, Dot upperBound, boolean includeBounds) {
         if (includeBounds)
             return x >= lowerBound.x && x <= upperBound.x
-                && y >= lowerBound.y && y <= upperBound.y;
+                    && y >= lowerBound.y && y <= upperBound.y;
 
         return x > lowerBound.x && x < upperBound.x
                 && y > lowerBound.y && y < upperBound.y;
     }
 
-//    public static Dot average(Dot first, Dot... rest) {
-//        List<Dot> allDots = new ArrayList<>(Arrays.asList(rest));
-//        allDots.add(first);
-//        final double sumX = allDots.stream().mapToDouble(dot -> dot.x).sum();
-//        final double sumY = allDots.stream().mapToDouble(dot -> dot.y).sum();
-//
-//        return new Dot(sumX/allDots.size(), sumY/allDots.size());
-//    }
-//
-//    public Double distanceTo(Dot other) {
-//        return Math.sqrt(square(x - other.x) + square(y - other.y));
-//    }
-//
-//    private Double square(double n) {
-//        return n * n;
-//    }
 }

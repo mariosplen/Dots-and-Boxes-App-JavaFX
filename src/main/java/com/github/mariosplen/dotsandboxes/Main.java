@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main extends Application {
 //        stage.show();
 
 
-        Game game = new Game(5);
+        GameStart game = new GameStart(3, List.of(new String[]{"Marios", "Kostas"}));
 
         Scene scene = new Scene(game.getBoard(), 800, 800);
 
