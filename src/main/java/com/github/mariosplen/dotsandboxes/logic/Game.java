@@ -1,4 +1,4 @@
-package com.github.mariosplen.dotsandboxes;
+package com.github.mariosplen.dotsandboxes.logic;
 
 import java.util.*;
 import java.util.function.Function;
@@ -125,6 +125,7 @@ public class Game {
                 .filter(box -> !completedBoxes().contains(box));
     }
 
+
     private Set<Box> boxesFor(Dot center) {
 //        {x-1,y-1},{x-1,y},{x-1,y+1}
 //         LeftTop,   Top,   RightTop
@@ -175,4 +176,19 @@ public class Game {
     private boolean hasCompletedInADraw() {
         return new HashSet<>(scores().values()).size() == 1;
     }
+
+
+//    public Set<int[]> getBoxes(){
+//        Box[] boxes = (Box[]) completedBoxes().toArray();
+//        Dot[] boxesCords = new Dot[0];
+//        int boxCounter = 0;
+//        for (int i =0; i<boxes.length;i++){
+//            boxesCords[i]=boxes[i].getTopLeft();
+//
+//        }
+//
+//
+//    }
+
+
 }

@@ -1,5 +1,7 @@
 package com.github.mariosplen.dotsandboxes;
 
+import com.github.mariosplen.dotsandboxes.logic.Dot;
+import com.github.mariosplen.dotsandboxes.logic.Game;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -23,25 +25,26 @@ public class GameGUI {
 //    number of Vedges = size^2 - size
 //    number of boxes = (size - 1)^2
 
-    private final Set pressedLines;
+
     private final int rows;
     private final int cols;
 
     private final GridPane root;
-    Game game;
+    private final Set<Line> clickedLines;
 
 
     public GameGUI(Game game) {
         this.rows = game.getRows();
         this.cols = game.getCols();
-        root = new GridPane();
-        pressedLines = new HashSet();
-        makeBoard();
+        this.root = new GridPane();
+        this.clickedLines = new HashSet<>();
+
+        makeBoard(game);
 
 
     }
 
-    private void makeBoard() {
+    private void makeBoard(Game game) {
         root.setAlignment(Pos.CENTER);
         root.setGridLinesVisible(false);
 
@@ -75,25 +78,26 @@ public class GameGUI {
                         l.setStroke(Color.WHITE);
 
                         l.setOnMouseEntered(event -> {
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.setStroke(Color.RED);
                             }
                         });
 
                         l.setOnMouseExited(event -> {
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.setStroke(Color.WHITE);
                             }
                         });
 
                         l.setOnMouseClicked(event -> {
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.getStrokeDashArray().clear();
                                 l.setStroke(Color.RED);
-                                pressedLines.add(l);
+                                clickedLines.add(l);
                                 Dot d0 = new Dot((GridPane.getRowIndex(l) - 1) * 0.5, GridPane.getColumnIndex(l) * 0.5);
                                 Dot d1 = new Dot((GridPane.getRowIndex(l) + 1) * 0.5, GridPane.getColumnIndex(l) * 0.5);
                                 game.join(d0, d1, game.nextPlayerName());
+
                             }
 
                         });
@@ -112,24 +116,24 @@ public class GameGUI {
                         l.setStroke(Color.WHITE);
 
                         l.setOnMouseEntered(event -> {
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.setStroke(Color.RED);
                             }
                         });
 
                         l.setOnMouseExited(event -> {
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.setStroke(Color.WHITE);
                             }
                         });
 
                         l.setOnMouseClicked(event -> {
 
-                            if (!pressedLines.contains(l)) {
+                            if (!clickedLines.contains(l)) {
                                 l.getStrokeDashArray().clear();
                                 l.setStroke(Color.RED);
                                 System.out.println("" + GridPane.getRowIndex(l) + "" + GridPane.getColumnIndex(l));
-                                pressedLines.add(l);
+                                clickedLines.add(l);
 
 
                                 Dot d0 = new Dot((GridPane.getRowIndex(l)) * 0.5, (GridPane.getColumnIndex(l) - 1) * 0.5);

@@ -1,5 +1,6 @@
 package com.github.mariosplen.dotsandboxes;
 
+import com.github.mariosplen.dotsandboxes.logic.Game;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,8 +16,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+// FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+// Scene scene = new Scene(fxmlLoader.load(), 320, 240);
 
 
         Game game = new Game(2, 4, List.of(new String[]{"Marios", "John"}));
