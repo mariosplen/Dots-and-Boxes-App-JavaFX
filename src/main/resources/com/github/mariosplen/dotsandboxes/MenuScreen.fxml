@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" xmlns="http://javafx.com/javafx/16"
+          fx:controller="com.github.mariosplen.dotsandboxes.MenuScreenController">
+
+    <Label fx:id="playerOneNameLabel" text="Player 1 Name" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="playerOneNameField" promptText="Enter Player 1 Name" GridPane.columnIndex="2"
+               GridPane.rowIndex="1"/>
+
+    <Label fx:id="playerTwoNameLabel" text="Player 2 Name" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="playerTwoNameField" promptText="Enter Player 2 Name" GridPane.columnIndex="2"
+               GridPane.rowIndex="2"/>
+
+    <Label fx:id="playerOneSymbolLabel" text="Player 1 Symbol" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <HBox GridPane.columnIndex="2" GridPane.rowIndex="3">
+        <RadioButton fx:id="crossSymbol" text="X"/>
+        <RadioButton fx:id="zeroSymbol" text="O"/>
+    </HBox>
+
+    <Label fx:id="playerOneColorLabel" text="Player 1 Color" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <ColorPicker fx:id="playerOneColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+
+    <Label fx:id="playerTwoColorLabel" text="Player 2 Color" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <ColorPicker fx:id="playerTwoColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+    <Button fx:id="startGameButton" text="Start Game" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+
+
+</GridPane>

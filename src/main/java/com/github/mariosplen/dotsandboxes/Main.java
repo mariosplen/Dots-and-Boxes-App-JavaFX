@@ -1,31 +1,45 @@
 package com.github.mariosplen.dotsandboxes;
 
-import com.github.mariosplen.dotsandboxes.logic.Game;
+
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.List;
-
 public class Main extends Application {
+
+    static Stage stage;
+
+    private static Scene scene;
+
+    static final int STAGE_DEFAULT_WIDTH = 300;
+    static final int STAGE_DEFAULT_HEIGHT = 300;
+    //static final int BUTTON_DEFAULT_FONT_SIZE = 40;
+
+
+
+
     public static void main(String[] args) {
-        launch();
+        launch(args);
+    }
+
+    public static void changeScene(Scene scene) {
+        stage.setScene(scene);
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
 
-// FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-// Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MenuScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), STAGE_DEFAULT_WIDTH, STAGE_DEFAULT_HEIGHT);
 
 
-        Game game = new Game(2, 4, List.of(new String[]{"Marios", "John"}));
-        GameGUI gameGUI = new GameGUI(game);
 
-        Scene scene = new Scene(gameGUI.getBoard(), 800, 800);
+        primaryStage.setTitle("Dots and Boxes");
 
-        stage.setScene(scene);
-        stage.show();
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
