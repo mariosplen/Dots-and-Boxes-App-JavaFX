@@ -1,7 +1,7 @@
 package com.github.mariosplen.dotsandboxes;
 
-import com.github.mariosplen.dotsandboxes.logic.Dot;
-import com.github.mariosplen.dotsandboxes.logic.Game;
+import com.github.mariosplen.dotsandboxes.models.Dot;
+import com.github.mariosplen.dotsandboxes.models.Game;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;

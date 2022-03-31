@@ -1,6 +1,6 @@
 package com.github.mariosplen.dotsandboxes;
 
-import com.github.mariosplen.dotsandboxes.logic.Game;
+import com.github.mariosplen.dotsandboxes.models.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

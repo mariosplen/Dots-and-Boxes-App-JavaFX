@@ -1,4 +1,4 @@
-package com.github.mariosplen.dotsandboxes.logic;
+package com.github.mariosplen.dotsandboxes.models;
 
 import java.util.*;
 import java.util.function.Function;

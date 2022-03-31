@@ -1,4 +1,4 @@
-package com.github.mariosplen.dotsandboxes.logic;
+package com.github.mariosplen.dotsandboxes.models;
 
 public record Dot(double x, double y) {
 
