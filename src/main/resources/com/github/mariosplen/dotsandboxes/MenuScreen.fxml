@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" xmlns="http://javafx.com/javafx/16"
           fx:controller="com.github.mariosplen.dotsandboxes.MenuScreenController">
 
@@ -13,18 +15,54 @@
     <TextField fx:id="playerTwoNameField" promptText="Enter Player 2 Name" GridPane.columnIndex="2"
                GridPane.rowIndex="2"/>
 
-    <Label fx:id="playerOneSymbolLabel" text="Player 1 Symbol" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <HBox GridPane.columnIndex="2" GridPane.rowIndex="3">
-        <RadioButton fx:id="crossSymbol" text="X"/>
-        <RadioButton fx:id="zeroSymbol" text="O"/>
-    </HBox>
+    <Label fx:id="playerOneAvatarLabel" text="Player 1 Avatar" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <ComboBox fx:id="playerOneAvatarField" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Apple"/>
+                <String fx:value="Orange"/>
+                <String fx:value="Pear"/>
+            </FXCollections>
 
-    <Label fx:id="playerOneColorLabel" text="Player 1 Color" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <ColorPicker fx:id="playerOneColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+        </items>
 
-    <Label fx:id="playerTwoColorLabel" text="Player 2 Color" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <ColorPicker fx:id="playerTwoColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-    <Button fx:id="startGameButton" text="Start Game" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+    </ComboBox>
+
+    <Label fx:id="playerTwoAvatarLabel" layoutX="10.0" layoutY="62.0" text="Player 2 Avatar" GridPane.rowIndex="4"/>
+    <ComboBox fx:id="playerTwoAvatarField" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Apple"/>
+                <String fx:value="Orange"/>
+                <String fx:value="Pear"/>
+            </FXCollections>
+
+        </items>
+
+    </ComboBox>
+
+
+    <Label fx:id="playerOneColorLabel" text="Player 1 Color" GridPane.rowIndex="5"/>
+    <ColorPicker fx:id="playerOneColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+
+    <Label fx:id="playerTwoColorLabel" text="Player 2 Color" GridPane.rowIndex="6"/>
+    <ColorPicker fx:id="playerTwoColorPicker" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
+    <Button fx:id="startGameButton" text="Start Game" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+    <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
 
 
 </GridPane>
