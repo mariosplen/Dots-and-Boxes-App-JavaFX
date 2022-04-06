@@ -6,6 +6,8 @@ import com.github.mariosplen.dotsandboxes.models.Move;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -122,8 +124,33 @@ public class GamePane extends GridPane {
                 game.getCurrentPlayer().makeMove(move);
                 line.getStrokeDashArray().clear();
                 clickedLines.add(line);
-            }
 
+                int[][] sq = game.getBoard().getSquares();
+                for (int j = 0; j < sq[0].length; j++) {
+                    for (int i = 0; i < sq.length; i++) {
+
+                        if (sq[i][j] == 0) {
+                            add(new Label(game.getCurrentPlayer().getName() + " wins box"), 2 * (i) + 1, 2 * (j) + 1);
+                        }
+                        System.out.println(sq[i][j]);
+                    }
+                }
+                if (!game.getBoard().isNotOver()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("GAME OVER");
+                    String winner;
+                    if (game.getPlayer0().getPoints() > game.getPlayer1().getPoints()) {
+                        winner = game.getPlayer0().getName();
+                    } else if (game.getPlayer0().getPoints() < game.getPlayer1().getPoints()) {
+                        winner = game.getPlayer1().getName();
+
+                    } else {
+                        winner = "Tie";
+                    }
+                    alert.setContentText("WINNER IS " + winner);
+                    alert.showAndWait();
+                }
+            }
         });
 
         return line;

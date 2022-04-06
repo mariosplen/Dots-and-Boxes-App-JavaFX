@@ -9,7 +9,6 @@ public class Game {
     private final Player player0;
     private final Player player1;
     private boolean playerZeroTurn;
-
     public Game(int size, Player player0, Player player1) {
         this.board = new Board(this, size);
 
@@ -23,6 +22,13 @@ public class Game {
 
     }
 
+    public Player getPlayer0() {
+        return player0;
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
 
     public Board getBoard() {
         return board;

@@ -38,14 +38,14 @@
     <left>
         <VBox alignment="CENTER" prefHeight="414.0" prefWidth="220.0" BorderPane.alignment="CENTER">
             <TextField fx:id="playerOneNameField" alignment="CENTER" maxWidth="150.0" promptText="Player1"/>
-            <Circle fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
+            <Circle fx:id="circleAvatar0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
-                <Button mnemonicParsing="false" text="Back"/>
-                <Button mnemonicParsing="false" text="Next"/>
+                <Button fx:id="p0BackButton" mnemonicParsing="false" text="Back"/>
+                <Button fx:id="p0NextButton" mnemonicParsing="false" text="Next"/>
             </HBox>
             <ColorPicker fx:id="playerOneColorPicker">
                 <value>
-                    <Color red="1.0"/>
+                    <Color blue="1.0"/>
                 </value>
             </ColorPicker>
         </VBox>
@@ -53,14 +53,14 @@
     <right>
         <VBox alignment="CENTER" prefHeight="414.0" prefWidth="220.0" BorderPane.alignment="CENTER">
             <TextField fx:id="playerTwoNameField" alignment="CENTER" maxWidth="150.0" promptText="Player2"/>
-            <Circle fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
+            <Circle fx:id="circleAvatar1" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
-                <Button mnemonicParsing="false" text="Back"/>
-                <Button mnemonicParsing="false" text="Next"/>
+                <Button fx:id="p1BackButton" mnemonicParsing="false" text="Back"/>
+                <Button fx:id="p1NextButton" mnemonicParsing="false" text="Next"/>
             </HBox>
             <ColorPicker fx:id="playerTwoColorPicker">
                 <value>
-                    <Color blue="1.0"/>
+                    <Color red="1.0"/>
                 </value>
             </ColorPicker>
         </VBox>

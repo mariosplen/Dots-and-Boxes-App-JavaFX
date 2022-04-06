@@ -10,12 +10,15 @@ public class Player {
     private final Image image;
     private int points;
     private Game game;
-
     public Player(String name, Color color, Image image) {
         this.name = name;
         this.color = color;
         this.image = image;
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Color getColor() {
