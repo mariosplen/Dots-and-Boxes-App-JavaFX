@@ -1,27 +1,37 @@
 package com.github.mariosplen.dotsandboxes.models;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+
 public class Player {
 
+    private final String name;
+    private final Color color;
+    private final Image image;
+    private int points;
+    private Game game;
 
-    Game game;
-    int points;
-    String color;
+    public Player(String name, Color color, Image image) {
+        this.name = name;
+        this.color = color;
+        this.image = image;
 
-    Player(Game game, int points) {
-        this.game = game;
-        this.points = points;
     }
 
-    Player(Game game) {
-        this(game, 0);
+    public Color getColor() {
+        return color;
     }
 
     public int getPoints() {
         return points;
     }
 
-    void setPoints(int points) {
+    public void setPoints(int points) {
         this.points = points;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public void makeMove(Move move) {

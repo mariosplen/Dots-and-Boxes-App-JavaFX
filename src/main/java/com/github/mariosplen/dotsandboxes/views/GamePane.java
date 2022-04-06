@@ -1,9 +1,8 @@
 package com.github.mariosplen.dotsandboxes.views;
 
 
-import com.github.mariosplen.dotsandboxes.App;
+import com.github.mariosplen.dotsandboxes.models.Game;
 import com.github.mariosplen.dotsandboxes.models.Move;
-import com.github.mariosplen.dotsandboxes.models.Player;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -18,23 +17,26 @@ import java.util.Set;
 
 
 public class GamePane extends GridPane {
-    static final int DISTANCE = 100;
-    private static final int RADIUS = 6;
-
-    private static final int LINE_WIDTH = 4;
-    private static final int LINE_DISTANCE = DISTANCE - 2 * RADIUS;
-    private static final int size = App.getGame().getBoard().getSize();
+    private final Game game;
+    private final int size;
+    private final int DISTANCE = 150;
+    private final int RADIUS = 12;
+    private final int LINE_WIDTH = 8;
+    private final int LINE_DISTANCE = DISTANCE - 2 * RADIUS;
 
     private final Set<Line> clickedLines = new HashSet<>();
 
 
-    public GamePane() {
+    public GamePane(Game game) {
+        this.game = game;
+        size = game.getBoard().getSize();
+        System.out.println(size);
         initializeBoard();
     }
 
     private void initializeBoard() {
         setAlignment(Pos.CENTER);
-        setGridLinesVisible(true);
+        setGridLinesVisible(false);
         for (int row = 0; row < 2 * size - 1; row++) {
             for (int col = 0; col < 2 * size - 1; col++) {
                 if (row % 2 == 0) {
@@ -46,6 +48,7 @@ public class GamePane extends GridPane {
                         add(c, row, col);
                         GridPane.setHalignment(c, HPos.CENTER);
                         GridPane.setValignment(c, VPos.CENTER);
+
                     } else {
                         // VERTICAL LINES
                         Line line = createLine(row, col);
@@ -91,7 +94,7 @@ public class GamePane extends GridPane {
         line.setStrokeWidth(LINE_WIDTH);
         line.setStroke(Color.WHITESMOKE);
         line.getStrokeDashArray().addAll(10d, 12d);
-        line.setStrokeDashOffset(5d);
+        line.setStrokeDashOffset(8d);
 
         // Conversion from GUI Grid to Game Grid
         int fromRow = r / 2;
@@ -112,17 +115,14 @@ public class GamePane extends GridPane {
         });
 
         line.setOnMouseClicked(event -> {
+
             if (!clickedLines.contains(line)) {
+                line.setStroke(game.getCurrentPlayer().getColor());
                 Move move = new Move(fromRow, fromCol, toRow, toCol);
-                Player currentPlayer = App.getGame().getCurrentPlayer();
-                currentPlayer.makeMove(move);
+                game.getCurrentPlayer().makeMove(move);
                 line.getStrokeDashArray().clear();
-                line.setStroke(Color.RED);
                 clickedLines.add(line);
             }
-
-
-            System.out.println("CLICKED");
 
         });
 

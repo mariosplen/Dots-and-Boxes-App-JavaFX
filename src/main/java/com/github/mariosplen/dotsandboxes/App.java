@@ -1,6 +1,7 @@
 package com.github.mariosplen.dotsandboxes;
 
 import com.github.mariosplen.dotsandboxes.models.Game;
+import com.github.mariosplen.dotsandboxes.models.Player;
 import com.github.mariosplen.dotsandboxes.views.GamePane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,58 +13,38 @@ import java.io.IOException;
 
 public class App extends Application {
 
-    private static Game game;
-    private static Stage stage;
-    private static Scene scene;
+    static Stage stage;
+    static Scene scene;
 
-    public static Stage getStage() {
-        return stage;
-    }
+    public static void newGame(int size, Player player0, Player player1) {
 
-    public static void setStage(Scene newScene) {
-        stage.setScene(newScene);
-    }
+        Game game = new Game(size, player0, player1);
+        BorderPane mainBorderPane = new BorderPane();
 
-    public static Game getGame() {
-        return game;
-    }
+        GamePane gamePane = new GamePane(game);
 
-    public static void startGame(int size) {
-        game = new Game(size);
+        mainBorderPane.setCenter(gamePane);
+
+
+        scene = new Scene(mainBorderPane);
+        stage.setScene(scene);
+
 
     }
-
-    public static void startScene() {
-        BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(new GamePane());
-
-        scene = new Scene(borderPane);
-    }
-
-    public static Scene getScene() {
-        return scene;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 300, 300);
+        scene = new Scene(fxmlLoader.load());
 
-
-        primaryStage.setTitle("Dots and Boxes");
-
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setTitle("Dots & Boxes");
+        stage.setScene(scene);
+        stage.show();
 
 
     }
+
 
 }

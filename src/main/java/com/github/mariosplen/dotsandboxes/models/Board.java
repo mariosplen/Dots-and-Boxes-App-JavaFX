@@ -1,25 +1,24 @@
 package com.github.mariosplen.dotsandboxes.models;
 
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 
 public class Board {
 
-
-    private final Game game;
     private final int size;
+    private final Game game;
     private final int[][] squares;
-    private final LinkedList<Move> doneMoves;
     private final LinkedHashSet<Move> possibleMoves;
 
     Board(Game game, int size) {
         this.game = game;
         this.size = size;
-        this.squares = new int[size - 1][size - 1];
-        this.doneMoves = new LinkedList<>();
+        squares = new int[size - 1][size - 1];
         this.possibleMoves = new LinkedHashSet<>();
         initializeGameBoard();
+    }
+
+    public int[][] getSquares() {
+        return squares;
     }
 
     public boolean isNotOver() {
@@ -52,69 +51,9 @@ public class Board {
 
     }
 
-    public Move undoLastMove() {
-        if (doneMoves.isEmpty())
-            return null;
-
-        Move move = doneMoves.removeLast();
-        move.getPlayer().setPoints(move.getPlayer().getPoints() - move.getPointsDone());
-        possibleMoves.add(move);
-
-        int x = move.getRowFrom();
-        int y = move.getColFrom();
-
-        if (move.isHorizontal()) {
-            if (x == 0) {
-                squares[x][y]++;
-            } else if (x == size - 1) {
-                squares[x - 1][y]++;
-            } else {
-                squares[x][y]++;
-                squares[x - 1][y]++;
-            }
-        } else {
-            if (y == 0) {
-                squares[x][y]++;
-            } else if (y == size - 1) {
-                squares[x][y - 1]++;
-            } else {
-                squares[x][y]++;
-                squares[x][y - 1]++;
-            }
-        }
-
-        Player currentPlayer = game.getCurrentPlayer();
-        if (move.getPlayer() != currentPlayer) {
-            game.changeCurrentPlayerTurn();
-        }
-
-        return move;
-    }
-
-    public List<Move> getLastDoneMoves() {
-        if (doneMoves.isEmpty())
-            return null;
-
-        LinkedList<Move> result = new LinkedList<>();
-        boolean stop = false;
-        result.add(doneMoves.getLast());
-        for (int i = doneMoves.size() - 2; i >= 0 && !stop; i--) {
-            if (doneMoves.get(i).getPlayer() == result.getFirst().getPlayer()) {
-                result.add(doneMoves.get(i));
-            } else {
-                stop = true;
-            }
-        }
-        return result;
-    }
-
-    public List<Move> getAllDoneMoves() {
-        return doneMoves;
-    }
 
     void makeMove(Move move) {
         if (possibleMoves.contains(move)) {
-            doneMoves.addLast(move);
             possibleMoves.remove(move);
 
             int pointsDone = 0;

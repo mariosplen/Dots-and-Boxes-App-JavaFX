@@ -1,9 +1,9 @@
 package com.github.mariosplen.dotsandboxes.models;
 
+
 import java.util.Objects;
 
 public class Move {
-
 
     private final int rowFrom;
     private final int colFrom;
@@ -11,10 +11,12 @@ public class Move {
     private final int colTo;
     private int pointsDone;
     private Player player;
+
     Move(Move move, Player player) {
         this(move.rowFrom, move.colFrom, move.rowTo, move.colTo);
         this.player = player;
     }
+
     public Move(int rowFrom, int colFrom, int rowTo, int colTo) {
         this.rowFrom = rowFrom;
         this.colFrom = colFrom;
@@ -24,13 +26,6 @@ public class Move {
         this.player = null;
     }
 
-    public int getRowTo() {
-        return rowTo;
-    }
-
-    public int getColTo() {
-        return colTo;
-    }
 
     public int getRowFrom() {
         return rowFrom;
@@ -72,6 +67,5 @@ public class Move {
     public int hashCode() {
         return Objects.hash(rowFrom, colFrom, rowTo, colTo);
     }
-
 
 }

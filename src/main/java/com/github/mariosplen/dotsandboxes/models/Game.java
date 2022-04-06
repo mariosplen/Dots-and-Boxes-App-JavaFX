@@ -1,5 +1,6 @@
 package com.github.mariosplen.dotsandboxes.models;
 
+
 import java.util.Random;
 
 public class Game {
@@ -9,25 +10,19 @@ public class Game {
     private final Player player1;
     private boolean playerZeroTurn;
 
-    public Game(int size) {
+    public Game(int size, Player player0, Player player1) {
         this.board = new Board(this, size);
 
+        this.player0 = player0;
+        this.player1 = player1;
+
+        this.player0.setGame(this);
+        this.player1.setGame(this);
         Random random = new Random();
         this.playerZeroTurn = random.nextBoolean();
 
-        this.player0 = new Player(this);
-        this.player1 = new Player(this);
-
     }
 
-
-    public Player getPlayer0() {
-        return player0;
-    }
-
-    public Player getPlayer1() {
-        return player1;
-    }
 
     public Board getBoard() {
         return board;
