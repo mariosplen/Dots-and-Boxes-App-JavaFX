@@ -10,11 +10,15 @@ public class Player {
     private final Image image;
     private int points;
     private Game game;
+
     public Player(String name, Color color, Image image) {
         this.name = name;
         this.color = color;
         this.image = image;
+    }
 
+    public Image getImage() {
+        return image;
     }
 
     public String getName() {
@@ -40,6 +44,5 @@ public class Player {
     public void makeMove(Move move) {
         game.getBoard().makeMove(new Move(move, this));
     }
-
 
 }

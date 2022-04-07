@@ -2,7 +2,7 @@ package com.github.mariosplen.dotsandboxes;
 
 import com.github.mariosplen.dotsandboxes.models.Game;
 import com.github.mariosplen.dotsandboxes.models.Player;
-import com.github.mariosplen.dotsandboxes.views.GamePane;
+import com.github.mariosplen.dotsandboxes.views.BoardPane;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,10 +21,10 @@ public class App extends Application {
         Game game = new Game(size, player0, player1);
         BorderPane mainBorderPane = new BorderPane();
 
-        GamePane gamePane = new GamePane(game);
+        BoardPane boardPane = new BoardPane(game);
 
-        mainBorderPane.setCenter(gamePane);
-
+        mainBorderPane.setCenter(boardPane);
+        mainBorderPane.setLeft(boardPane.setText());
 
         scene = new Scene(mainBorderPane);
         stage.setScene(scene);

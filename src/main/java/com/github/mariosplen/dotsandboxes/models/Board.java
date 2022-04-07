@@ -13,7 +13,7 @@ public class Board {
         this.game = game;
         this.size = size;
         squares = new int[size - 1][size - 1];
-        this.possibleMoves = new LinkedHashSet<>();
+        possibleMoves = new LinkedHashSet<>();
         initializeGameBoard();
     }
 
@@ -48,14 +48,11 @@ public class Board {
                 }
             }
         }
-
     }
-
 
     void makeMove(Move move) {
         if (possibleMoves.contains(move)) {
             possibleMoves.remove(move);
-
             int pointsDone = 0;
             int x = move.getRowFrom();
             int y = move.getColFrom();
@@ -106,11 +103,9 @@ public class Board {
             if (pointsDone == 0) {
                 game.changeCurrentPlayerTurn();
             } else {
-                move.setPointsDone(pointsDone);
                 move.getPlayer().setPoints(move.getPlayer().getPoints() + pointsDone);
             }
         }
     }
-
 
 }

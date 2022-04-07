@@ -37,7 +37,8 @@
     </bottom>
     <left>
         <VBox alignment="CENTER" prefHeight="414.0" prefWidth="220.0" BorderPane.alignment="CENTER">
-            <TextField fx:id="playerOneNameField" alignment="CENTER" maxWidth="150.0" promptText="Player1"/>
+            <TextField fx:id="playerOneNameField" alignment="CENTER" maxWidth="150.0" promptText="Player1"
+                       text="Player1"/>
             <Circle fx:id="circleAvatar0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
                 <Button fx:id="p0BackButton" mnemonicParsing="false" text="Back"/>
