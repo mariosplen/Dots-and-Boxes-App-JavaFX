@@ -1,57 +1,33 @@
 package com.github.mariosplen.dotsandboxes.models;
 
+import com.github.mariosplen.dotsandboxes.Game;
+
 import java.util.LinkedHashSet;
 
 public class Board {
 
     private final int size;
-    private final Game game;
     private final int[][] squares;
-    private final LinkedHashSet<Move> possibleMoves;
+    LinkedHashSet<Move> possibleMoves;
 
-    Board(Game game, int size) {
-        this.game = game;
+    public Board(int size) {
         this.size = size;
-        squares = new int[size - 1][size - 1];
+        squares = new int[this.size - 1][this.size - 1];
         possibleMoves = new LinkedHashSet<>();
-        initializeGameBoard();
-    }
 
-    public int[][] getSquares() {
-        return squares;
-    }
-
-    public boolean isNotOver() {
-        return !possibleMoves.isEmpty();
+        initializeBoard();
     }
 
     public int getSize() {
         return size;
     }
 
-    private void initializeGameBoard() {
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - 1; j++) {
-                squares[i][j] = 4;
-            }
-        }
-
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
-                if (row == size - 1 && col != size - 1) {
-                    possibleMoves.add(new Move(row, col, row, col + 1));
-                } else if (col == size - 1 && row != size - 1) {
-                    possibleMoves.add(new Move(row, col, row + 1, col));
-                } else if (row != size - 1 && col != size - 1) {
-                    possibleMoves.add(new Move(row, col, row, col + 1));
-                    possibleMoves.add(new Move(row, col, row + 1, col));
-                }
-            }
-        }
+    public boolean possibleMoveContains(Move move) {
+        return possibleMoves.contains(move);
     }
 
-    void makeMove(Move move) {
-        if (possibleMoves.contains(move)) {
+    public void makeMove(Move move) {
+        if (possibleMoveContains(move)) {
             possibleMoves.remove(move);
             int pointsDone = 0;
             int x = move.getRowFrom();
@@ -100,10 +76,32 @@ public class Board {
                     }
                 }
             }
-            if (pointsDone == 0) {
-                game.changeCurrentPlayerTurn();
+            if (pointsDone != 0) {
+                Game.getCurrentPlayer().setPoints(Game.getCurrentPlayer().getPoints() + pointsDone);
+
             } else {
-                move.getPlayer().setPoints(move.getPlayer().getPoints() + pointsDone);
+                Game.changeCurrentPlayerTurn();
+            }
+        }
+    }
+
+    private void initializeBoard() {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1; j++) {
+                squares[i][j] = 4;
+            }
+        }
+
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                if (row == size - 1 && col != size - 1) {
+                    possibleMoves.add(new Move(row, col, row, col + 1));
+                } else if (col == size - 1 && row != size - 1) {
+                    possibleMoves.add(new Move(row, col, row + 1, col));
+                } else if (row != size - 1 && col != size - 1) {
+                    possibleMoves.add(new Move(row, col, row, col + 1));
+                    possibleMoves.add(new Move(row, col, row + 1, col));
+                }
             }
         }
     }

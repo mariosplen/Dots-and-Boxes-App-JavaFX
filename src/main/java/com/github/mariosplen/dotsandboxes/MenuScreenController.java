@@ -1,6 +1,7 @@
 package com.github.mariosplen.dotsandboxes;
 
 import com.github.mariosplen.dotsandboxes.models.Player;
+import com.github.mariosplen.dotsandboxes.views.BoardPane;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
@@ -30,29 +31,17 @@ public class MenuScreenController {
     int im0Index = 12;
     int im1Index = 1;
     @FXML
-    private TextField playerOneNameField;
-    @FXML
-    private TextField playerTwoNameField;
+    private TextField playerOneNameField, playerTwoNameField;
     @FXML
     private Slider sizeSlider;
     @FXML
-    private ColorPicker playerOneColorPicker;
-    @FXML
-    private ColorPicker playerTwoColorPicker;
+    private ColorPicker playerOneColorPicker, playerTwoColorPicker;
     @FXML
     private Button startGameButton;
     @FXML
-    private Button p0NextButton;
+    private Button p0NextButton, p0BackButton, p1NextButton, p1BackButton;
     @FXML
-    private Button p0BackButton;
-    @FXML
-    private Button p1NextButton;
-    @FXML
-    private Button p1BackButton;
-    @FXML
-    private Circle circleAvatar0;
-    @FXML
-    private Circle circleAvatar1;
+    private Circle circleAvatar0, circleAvatar1;
 
     public void initialize() {
 
@@ -87,7 +76,8 @@ public class MenuScreenController {
             Player p0 = new Player(playerOneName, playerOneColor, playerOneAvatar);
             Player p1 = new Player(playerTwoName, playerTwoColor, playerTwoAvatar);
 
-            App.newGame(size, p0, p1);
+            BoardPane boardPane = new Game(size, p0, p1).getBoardPane();
+            App.setNewScene(boardPane);
 
         });
 

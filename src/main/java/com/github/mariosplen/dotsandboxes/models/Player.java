@@ -9,7 +9,6 @@ public class Player {
     private final Color color;
     private final Image image;
     private int points;
-    private Game game;
 
     public Player(String name, Color color, Image image) {
         this.name = name;
@@ -35,14 +34,6 @@ public class Player {
 
     public void setPoints(int points) {
         this.points = points;
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    public void makeMove(Move move) {
-        game.getBoard().makeMove(new Move(move, this));
     }
 
 }
