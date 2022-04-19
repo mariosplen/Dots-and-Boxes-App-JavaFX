@@ -1,88 +1,36 @@
 package com.github.mariosplen.dotsandboxes.models;
 
-import com.github.mariosplen.dotsandboxes.Game;
-
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 public class Board {
 
     private final int size;
     private final int[][] squares;
-    LinkedHashSet<Move> possibleMoves;
+    private final LinkedHashSet<Move> possibleMoves;
+    private final ArrayList<int[]> need2BeDrawn;
+    private final Player player0, player1;
+    private boolean playerZeroTurn;
+    public Board(Conf gameConf) {
+        this.size = gameConf.getSize();
+        this.player0 = gameConf.getPlayer0();
+        this.player1 = gameConf.getPlayer1();
+        this.playerZeroTurn = gameConf.PlayerZeroPlaysFirst();
 
-    public Board(int size) {
-        this.size = size;
         squares = new int[this.size - 1][this.size - 1];
         possibleMoves = new LinkedHashSet<>();
+        need2BeDrawn = new ArrayList<>();
+
 
         initializeBoard();
     }
 
+    public ArrayList<int[]> getNeed2BeDrawn() {
+        return need2BeDrawn;
+    }
+
     public int getSize() {
         return size;
-    }
-
-    public boolean possibleMoveContains(Move move) {
-        return possibleMoves.contains(move);
-    }
-
-    public void makeMove(Move move) {
-        if (possibleMoveContains(move)) {
-            possibleMoves.remove(move);
-            int pointsDone = 0;
-            int x = move.getRowFrom();
-            int y = move.getColFrom();
-
-            if (move.isHorizontal()) {
-                if (x == 0) {
-                    squares[x][y]--;
-                    if (squares[x][y] == 0) {
-                        pointsDone++;
-                    }
-                } else if (x == size - 1) {
-                    squares[x - 1][y]--;
-                    if (squares[x - 1][y] == 0) {
-                        pointsDone++;
-                    }
-                } else {
-                    squares[x][y]--;
-                    if (squares[x][y] == 0) {
-                        pointsDone++;
-                    }
-                    squares[x - 1][y]--;
-                    if (squares[x - 1][y] == 0) {
-                        pointsDone++;
-                    }
-                }
-            } else {
-                if (y == 0) {
-                    squares[x][y]--;
-                    if (squares[x][y] == 0) {
-                        pointsDone++;
-                    }
-                } else if (y == size - 1) {
-                    squares[x][y - 1]--;
-                    if (squares[x][y - 1] == 0) {
-                        pointsDone++;
-                    }
-                } else {
-                    squares[x][y]--;
-                    if (squares[x][y] == 0) {
-                        pointsDone++;
-                    }
-                    squares[x][y - 1]--;
-                    if (squares[x][y - 1] == 0) {
-                        pointsDone++;
-                    }
-                }
-            }
-            if (pointsDone != 0) {
-                Game.getCurrentPlayer().setPoints(Game.getCurrentPlayer().getPoints() + pointsDone);
-
-            } else {
-                Game.changeCurrentPlayerTurn();
-            }
-        }
     }
 
     private void initializeBoard() {
@@ -106,4 +54,87 @@ public class Board {
         }
     }
 
+    public boolean isPossibleMove(Move move) {
+        return possibleMoves.contains(move);
+    }
+
+    public void markDrawn() {
+        need2BeDrawn.clear();
+    }
+
+    public void makeMove(Move move) {
+        if (isPossibleMove(move)) {
+
+            possibleMoves.remove(move);
+            int pointsDone = 0;
+            int x = move.getRowFrom();
+            int y = move.getColFrom();
+
+            if (move.isHorizontal()) {
+                if (x == 0) {
+                    squares[x][y]--;
+                    if (squares[x][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y});
+                    }
+                } else if (x == size - 1) {
+                    squares[x - 1][y]--;
+                    if (squares[x - 1][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x - 1, y});
+                    }
+                } else {
+                    squares[x][y]--;
+                    if (squares[x][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y});
+                    }
+                    squares[x - 1][y]--;
+                    if (squares[x - 1][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x - 1, y});
+                    }
+                }
+            } else {
+                if (y == 0) {
+                    squares[x][y]--;
+                    if (squares[x][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y});
+                    }
+                } else if (y == size - 1) {
+                    squares[x][y - 1]--;
+                    if (squares[x][y - 1] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y - 1});
+                    }
+                } else {
+                    squares[x][y]--;
+                    if (squares[x][y] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y});
+                    }
+                    squares[x][y - 1]--;
+                    if (squares[x][y - 1] == 0) {
+                        pointsDone++;
+                        need2BeDrawn.add(new int[]{x, y - 1});
+                    }
+                }
+            }
+            if (pointsDone != 0) {
+                getCurrentPlayer().setPoints(getCurrentPlayer().getPoints() + pointsDone);
+
+            } else {
+                changeCurrentPlayerTurn();
+            }
+        }
+    }
+
+    public Player getCurrentPlayer() {
+        return playerZeroTurn ? player0 : player1;
+    }
+
+    private void changeCurrentPlayerTurn() {
+        playerZeroTurn = !playerZeroTurn;
+    }
 }

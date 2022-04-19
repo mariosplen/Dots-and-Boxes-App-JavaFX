@@ -1,6 +1,5 @@
 package com.github.mariosplen.dotsandboxes.views;
 
-import com.github.mariosplen.dotsandboxes.Game;
 import com.github.mariosplen.dotsandboxes.models.Board;
 import com.github.mariosplen.dotsandboxes.models.Move;
 import javafx.animation.Animation;
@@ -9,6 +8,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -19,18 +19,22 @@ import javafx.util.Duration;
 
 public class BoardPane extends GridPane {
 
+    public final int DISTANCE = 150;
+    public final int RADIUS = 12;
+    public final int LINE_WIDTH = 8;
+    public final int LINE_DISTANCE = DISTANCE - 2 * RADIUS;
     private final Board board;
-
     private final ScaleTransition st0, st1;
 
 
     public BoardPane(Board board) {
         this.board = board;
+        int size = board.getSize();
 
         st0 = setScaleTransition();
         st1 = setScaleTransition();
 
-        initializeBoardPane(board.getSize());
+        initializeBoardPane(size);
     }
 
     private ScaleTransition setScaleTransition() {
@@ -45,12 +49,13 @@ public class BoardPane extends GridPane {
 
     void initializeBoardPane(int size) {
         setAlignment(Pos.CENTER);
+
         for (int row = 0; row < 2 * size - 1; row++) {
             for (int col = 0; col < 2 * size - 1; col++) {
                 if (row % 2 == 0) {
                     if (col % 2 == 0) {
                         // DOTS
-                        Circle c = new Circle(Game.RADIUS, Color.BLACK);
+                        Circle c = new Circle(RADIUS, Color.BLACK);
 
 
                         add(c, row, col);
@@ -75,8 +80,8 @@ public class BoardPane extends GridPane {
                     } else {
                         // BOXES
                         Rectangle box = new Rectangle();
-                        box.setHeight(Game.LINE_DISTANCE);
-                        box.setHeight(Game.LINE_DISTANCE);
+                        box.setHeight(LINE_DISTANCE);
+                        box.setHeight(LINE_DISTANCE);
 
 
                         add(box, row, col);
@@ -95,16 +100,16 @@ public class BoardPane extends GridPane {
         Line line = new Line();
 
         if (isHorizontal) {
-            line.setEndX(Game.LINE_DISTANCE);
+            line.setEndX(LINE_DISTANCE);
         } else {
-            line.setEndY(Game.LINE_DISTANCE);
+            line.setEndY(LINE_DISTANCE);
         }
-        line.setStrokeWidth(Game.LINE_WIDTH);
+        line.setStrokeWidth(LINE_WIDTH);
         line.setStroke(Color.WHITESMOKE);
         line.getStrokeDashArray().addAll(10d, 12d);
         line.setStrokeDashOffset(8d);
 
-        // Conversion from GUI Grid to Game Grid
+        // Conversion from GUI Grid to Board Grid
         int fromRow = r / 2;
         int fromCol = c / 2;
         int toRow = r - fromRow;
@@ -112,7 +117,7 @@ public class BoardPane extends GridPane {
 
         line.setOnMouseEntered(event -> {
             Move move = new Move(fromRow, fromCol, toRow, toCol);
-            if (board.possibleMoveContains(move)) {
+            if (board.isPossibleMove(move)) {
                 line.setStroke(Color.BLACK);
                 Circle cr0, cr1;
 
@@ -144,7 +149,7 @@ public class BoardPane extends GridPane {
 
         line.setOnMouseExited(event -> {
             Move move = new Move(fromRow, fromCol, toRow, toCol);
-            if (board.possibleMoveContains(move)) {
+            if (board.isPossibleMove(move)) {
                 line.setStroke(Color.WHITESMOKE);
             }
             st1.jumpTo(Duration.ZERO);
@@ -156,41 +161,40 @@ public class BoardPane extends GridPane {
 
         line.setOnMouseClicked(event -> {
             Move move = new Move(fromRow, fromCol, toRow, toCol);
-            if (board.possibleMoveContains(move)) {
-                System.out.println("CLICKED");
-                line.setStroke(Game.getCurrentPlayer().getColor());
+            if (board.isPossibleMove(move)) {
 
+                line.setStroke(board.getCurrentPlayer().getColor());
                 board.makeMove(move);
                 line.getStrokeDashArray().clear();
+                for (int[] box : board.getNeed2BeDrawn()) {
+                    showLetter(box[0], box[1]);
+                }
+                board.markDrawn();
 
-//                int[][] sq = squares;
-//                for (int j = 0; j < sq[0].length; j++) {
-//                    for (int i = 0; i < sq.length; i++) {
-//
-//                        if (sq[i][j] == 0) {
-//                            gridPane.add(new Label(getCurrentPlayer().getName() + " wins box"), 2 * (i) + 1, 2 * (j) + 1);
-//                        }
-//                    }
-//                }
-//                if (possibleMoves.isEmpty()) {
-//                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//                    alert.setTitle("GAME OVER");
-//                    String winner;
-//                    if (player0.getPoints() > player1.getPoints()) {
-//                        winner = player0.getName();
-//                    } else if (player0.getPoints() < player1.getPoints()) {
-//                        winner = player1.getName();
-//
-//                    } else {
-//                        winner = "Tie";
-//                    }
-//                    alert.setContentText("WINNER IS " + winner);
-//                    alert.showAndWait();
-//                }
+
             }
         });
 
         return line;
+    }
+
+
+    private void showLetter(int r, int c) {
+
+
+        Label l = new Label();
+        l.setTextFill(board.getCurrentPlayer().getColor());
+        l.setText(board.getCurrentPlayer().getName());
+        setHalignment(l, HPos.CENTER);
+        setValignment(l, VPos.CENTER);
+        ScaleTransition st = new ScaleTransition(Duration.millis(500), l);
+        st.setByX(1.5f);
+        st.setByY(1.5f);
+
+
+        st.play();
+
+        add(l, 2 * (r) + 1, 2 * (c) + 1);
     }
 
 

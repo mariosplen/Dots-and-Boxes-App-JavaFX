@@ -1,35 +1,31 @@
 package com.github.mariosplen.dotsandboxes;
 
+import com.github.mariosplen.dotsandboxes.models.Conf;
 import com.github.mariosplen.dotsandboxes.models.Player;
-import com.github.mariosplen.dotsandboxes.views.BoardPane;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.File;
-import java.util.Objects;
 
 
 public class MenuScreenController {
 
+    private int size;
+    private String playerOneName;
+    private String playerTwoName;
+    private Image playerOneAvatar;
+    private Image playerTwoAvatar;
+    private Color playerOneColor;
+    private Color playerTwoColor;
+    private Image im0;
+    private Image im1;
+    private int im0Index = 0;
+    private int im1Index = 1;
 
-    private static int size;
-    private static String playerOneName;
-    private static String playerTwoName;
-    private static Image playerOneAvatar;
-    private static Image playerTwoAvatar;
-    private static Color playerOneColor;
-    private static Color playerTwoColor;
-    Image im0;
-    Image im1;
-    int im0Index = 12;
-    int im1Index = 1;
     @FXML
     private TextField playerOneNameField, playerTwoNameField;
     @FXML
@@ -43,47 +39,80 @@ public class MenuScreenController {
     @FXML
     private Circle circleAvatar0, circleAvatar1;
 
-    public void initialize() {
+    public void initialize() throws RuntimeException {
 
+        // Get images from folder
+        File[] images;
+        images = new File("assets/icons").listFiles();
 
-        File[] images = new File("assets/icons").listFiles();
-
-        assert images != null;
-        im0 = new Image(String.valueOf(images[im0Index].toURI()));
-        im1 = new Image(String.valueOf(images[im1Index].toURI()));
-
+        // Set default avatars
+        if (images != null && images.length > 2) {
+            im0 = new Image(String.valueOf(images[im0Index].toURI()));
+            im1 = new Image(String.valueOf(images[im1Index].toURI()));
+        } else {
+            throw new RuntimeException("Avatar assets not found!");
+        }
         playerOneAvatar = im0;
         playerTwoAvatar = im1;
         circleAvatar0.setFill(new ImagePattern(im0));
         circleAvatar1.setFill(new ImagePattern(im1));
 
 
+        // Check for valid parameters and start game
         startGameButton.setOnAction(actionEvent -> {
 
+            // Check if name is under 8 chars and set default name if no name is set
+            boolean invalidName = false;
             playerOneName = playerOneNameField.getText();
-            if (Objects.equals(playerOneName, "")) {
-                playerOneName = "Player1";
-            }
             playerTwoName = playerTwoNameField.getText();
-            if (Objects.equals(playerTwoName, "")) {
-                playerTwoName = "Player2";
+            if (playerOneName.isEmpty()) {
+                playerOneName = "Player1";
+            } else if (playerOneName.length() > 8) {
+                invalidName = true;
+                playerOneNameField.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+
+            } else {
+                playerOneNameField.setStyle("-fx-border-width: 0px ;");
             }
+
+            if (playerTwoName.isEmpty()) {
+                playerTwoName = "Player2";
+            } else if (playerTwoName.length() > 8) {
+                invalidName = true;
+                playerTwoNameField.setStyle("-fx-border-color: red ; -fx-border-width: 3px ;");
+
+            } else {
+                playerTwoNameField.setStyle("-fx-border-width: 0px ;");
+            }
+
+            if (invalidName) {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Names must be 8 or less characters long", ButtonType.CLOSE);
+                alert.showAndWait();
+                return;
+            }
+
+
+            // Get size from slider
             size = (int) sizeSlider.getValue();
 
+            // Get player colors
             playerOneColor = playerOneColorPicker.getValue();
             playerTwoColor = playerTwoColorPicker.getValue();
 
+            // Create players
             Player p0 = new Player(playerOneName, playerOneColor, playerOneAvatar);
             Player p1 = new Player(playerTwoName, playerTwoColor, playerTwoAvatar);
 
-            BoardPane boardPane = new Game(size, p0, p1).getBoardPane();
-            App.setNewScene(boardPane);
+
+            // Start new game with game parameters
+            App.beginNewGame(new Conf(size, p0, p1, true));
 
         });
 
 
+        // Cycle between avatar buttons
         p0NextButton.setOnAction(actionEvent -> {
-                    if (im0Index == 36) {
+                    if (im0Index == images.length - 1) {
                         im0Index = 0;
                     } else {
                         im0Index++;
@@ -95,7 +124,7 @@ public class MenuScreenController {
                 }
         );
         p1NextButton.setOnAction(actionEvent -> {
-                    if (im1Index == 36) {
+                    if (im1Index == images.length - 1) {
                         im1Index = 0;
                     } else {
                         im1Index++;
@@ -108,7 +137,7 @@ public class MenuScreenController {
         );
         p0BackButton.setOnAction(actionEvent -> {
                     if (im0Index == 0) {
-                        im0Index = 36;
+                        im0Index = images.length - 1;
                     } else {
                         im0Index--;
                     }
@@ -120,7 +149,7 @@ public class MenuScreenController {
         );
         p1BackButton.setOnAction(actionEvent -> {
                     if (im1Index == 0) {
-                        im1Index = 36;
+                        im1Index = images.length - 1;
                     } else {
                         im1Index--;
                     }
