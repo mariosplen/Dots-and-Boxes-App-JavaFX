@@ -51,7 +51,7 @@ public class App extends Application {
             borderPane.setPrefHeight(950);
         } else if (gameConf.getSize() == 6) {
             borderPane.setPrefWidth(850);
-            borderPane.setPrefHeight(1000);
+            borderPane.setPrefHeight(1100);
         }
 
         // Weird bug fix UNKNOWN CAUSE When under-scaling appears wrong background color
