@@ -1,7 +1,5 @@
 package com.github.mariosplen.dotsandboxes;
 
-//import com.github.mariosplen.dotsandboxes.models.Game;
-
 import com.github.mariosplen.dotsandboxes.models.Board;
 import com.github.mariosplen.dotsandboxes.models.Conf;
 import com.github.mariosplen.dotsandboxes.views.BoardPane;
@@ -21,12 +19,28 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-
     static Stage stage;
     static Scene scene;
     static BorderPane borderPane;
 
     //private static final ObservableList<Score> scores = FXCollections.observableArrayList();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
+        Pane controller = fxmlLoader.load();
+
+        // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
+        controller.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        controller.getStylesheets().add(String.valueOf(App.class.getResource("BootstrapFX.css")));
+
+        stage.setScene(applyScaling(controller));
+        stage.show();
+
+    }
 
     public static void beginNewGame(Conf gameConf) {
 
@@ -39,17 +53,29 @@ public class App extends Application {
         borderPane.setCenter(boardPane);
         borderPane.setTop(scorePane);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // MUST  MAKE AUTOMATICALLY!! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         borderPane.setPrefWidth(500);
         borderPane.setPrefHeight(600);
 
-        // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
+        // Weird bug fix UNKNOWN CAUSE When under-scaling appears wrong background color
         borderPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
-
         stage.setScene(applyScaling(borderPane));
-
-
     }
 
     private static Scene applyScaling(Pane controller) {
@@ -82,24 +108,8 @@ public class App extends Application {
     }
 
     public static void refreshScreen(Conf gameConf, Board board) {
-        ScorePane scorePane = new ScorePane(gameConf, board);
-        borderPane.setTop(scorePane);
+        borderPane.setTop(new ScorePane(gameConf, board));
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
-        Pane controller = fxmlLoader.load();
-
-        // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
-        controller.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-
-
-        stage.setScene(applyScaling(controller));
-        stage.show();
-
-    }
 
 }

@@ -4,6 +4,7 @@ import com.github.mariosplen.dotsandboxes.models.Conf;
 import com.github.mariosplen.dotsandboxes.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -34,6 +35,7 @@ public class MenuScreenController {
     private int im0Index = 0;
     private int im1Index = 0;
 
+
     public void initialize() {
 
         // Get images from folder
@@ -41,7 +43,7 @@ public class MenuScreenController {
 
         setDefaultAvatars(images);
 
-        // Check for valid parameters and start game
+        // Checks for valid parameters and starts game
         startGameButton.setOnAction(actionEvent -> startGameButtonPressed());
 
         // Cycle between avatar buttons
@@ -49,7 +51,6 @@ public class MenuScreenController {
         p1NextButton.setOnAction(actionEvent -> changeAvatar(false, true));
         p0BackButton.setOnAction(actionEvent -> changeAvatar(true, false));
         p1BackButton.setOnAction(actionEvent -> changeAvatar(false, false));
-
 
     }
 
@@ -156,6 +157,11 @@ public class MenuScreenController {
         }
         return invalidName;
 
+    }
+
+    public void setAvatarHighlight() {
+        circleAvatar0.setEffect(new DropShadow(+25d, 0d, +2d, playerOneColorPicker.getValue()));
+        circleAvatar1.setEffect(new DropShadow(+25d, 0d, +2d, playerTwoColorPicker.getValue()));
     }
 
 }

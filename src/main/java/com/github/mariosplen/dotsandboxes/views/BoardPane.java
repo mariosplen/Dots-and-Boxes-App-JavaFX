@@ -105,7 +105,7 @@ public class BoardPane extends GridPane {
             line.setEndY(LINE_DISTANCE);
         }
         line.setStrokeWidth(LINE_WIDTH);
-        line.setStroke(Color.WHITESMOKE);
+        line.setStroke(Color.WHITE);
         line.getStrokeDashArray().addAll(10d, 12d);
         line.setStrokeDashOffset(8d);
 
@@ -150,7 +150,7 @@ public class BoardPane extends GridPane {
         line.setOnMouseExited(event -> {
             Move move = new Move(fromRow, fromCol, toRow, toCol);
             if (board.isPossibleMove(move)) {
-                line.setStroke(Color.WHITESMOKE);
+                line.setStroke(Color.WHITE);
             }
             st1.jumpTo(Duration.ZERO);
             st1.stop();
