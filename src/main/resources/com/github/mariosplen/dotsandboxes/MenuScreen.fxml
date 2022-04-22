@@ -1,46 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
-            prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
             fx:controller="com.github.mariosplen.dotsandboxes.MenuScreenController">
     <top>
-        <Label text="Dots &amp; Boxes" BorderPane.alignment="CENTER"/>
+        <Label text="DOTS &amp; BOXES" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="Serif Bold" size="37.0"/>
+            </font>
+            <effect>
+                <Glow level="0.4"/>
+            </effect>
+        </Label>
     </top>
-    <center>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <Label text="Board Size"/>
-            <Slider fx:id="sizeSlider" blockIncrement="1.0" majorTickUnit="1.0" max="6.0" maxWidth="200.0" min="3.0"
-                    minorTickCount="0" showTickLabels="true" snapToTicks="true" value="3.0"/>
-            <Button fx:id="startGameButton" mnemonicParsing="false" text="Start"/>
-        </VBox>
-    </center>
-    <bottom>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
-                <RadioButton mnemonicParsing="false" selected="true">
-                    <toggleGroup>
-                        <ToggleGroup fx:id="themeSelector"/>
-                    </toggleGroup>
-                </RadioButton>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
-                <RadioButton mnemonicParsing="false" toggleGroup="$themeSelector"/>
-            </VBox>
-        </HBox>
-    </bottom>
     <left>
-        <VBox alignment="CENTER" prefHeight="414.0" prefWidth="220.0" BorderPane.alignment="CENTER">
-            <TextField fx:id="playerOneNameField" alignment="CENTER" maxWidth="150.0" promptText="Player1"/>
-            <Circle fx:id="circleAvatar0" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+        <VBox alignment="CENTER" prefHeight="347.0" prefWidth="170.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <TextField fx:id="playerOneNameField" alignment="CENTER" maxWidth="120.0" promptText="Player1"/>
+            <Circle fx:id="circleAvatar0" radius="60.0"/>
+            <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="75.0">
                 <Button fx:id="p0BackButton" mnemonicParsing="false" text="Back"/>
                 <Button fx:id="p0NextButton" mnemonicParsing="false" text="Next"/>
             </HBox>
@@ -52,10 +38,10 @@
         </VBox>
     </left>
     <right>
-        <VBox alignment="CENTER" prefHeight="414.0" prefWidth="220.0" BorderPane.alignment="CENTER">
-            <TextField fx:id="playerTwoNameField" alignment="CENTER" maxWidth="150.0" promptText="Player2"/>
-            <Circle fx:id="circleAvatar1" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE"/>
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="80.0">
+        <VBox alignment="CENTER" prefHeight="347.0" prefWidth="170.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <TextField fx:id="playerTwoNameField" alignment="CENTER" maxWidth="120.0" promptText="Player2"/>
+            <Circle fx:id="circleAvatar1" radius="60.0"/>
+            <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="75.0">
                 <Button fx:id="p1BackButton" mnemonicParsing="false" text="Back"/>
                 <Button fx:id="p1NextButton" mnemonicParsing="false" text="Next"/>
             </HBox>
@@ -66,4 +52,28 @@
             </ColorPicker>
         </VBox>
     </right>
+    <bottom>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                <ImageView fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true"/>
+                <RadioButton mnemonicParsing="false">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="themeSelectors"/>
+                    </toggleGroup>
+                </RadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                <ImageView fitHeight="100.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true"/>
+                <RadioButton mnemonicParsing="false" toggleGroup="$themeSelectors"/>
+            </VBox>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <Label text="Board Size"/>
+            <Slider fx:id="sizeSlider" blockIncrement="1.0" majorTickUnit="1.0" max="6.0" maxWidth="200.0" min="3.0"
+                    minorTickCount="0" showTickLabels="true" snapToTicks="true" value="3.0"/>
+            <Button fx:id="startGameButton" mnemonicParsing="false" text="Start"/>
+        </VBox>
+    </center>
 </BorderPane>

@@ -195,6 +195,7 @@ public class BoardPane extends GridPane {
         st.play();
 
         add(l, 2 * (r) + 1, 2 * (c) + 1);
+
     }
 
 

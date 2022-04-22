@@ -1,5 +1,7 @@
 package com.github.mariosplen.dotsandboxes.models;
 
+import com.github.mariosplen.dotsandboxes.App;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
@@ -10,8 +12,12 @@ public class Board {
     private final LinkedHashSet<Move> possibleMoves;
     private final ArrayList<int[]> need2BeDrawn;
     private final Player player0, player1;
+    private final Conf gameConf;
     private boolean playerZeroTurn;
+
+
     public Board(Conf gameConf) {
+        this.gameConf = gameConf;
         this.size = gameConf.getSize();
         this.player0 = gameConf.getPlayer0();
         this.player1 = gameConf.getPlayer1();
@@ -121,12 +127,15 @@ public class Board {
                     }
                 }
             }
+
             if (pointsDone != 0) {
                 getCurrentPlayer().setPoints(getCurrentPlayer().getPoints() + pointsDone);
+
 
             } else {
                 changeCurrentPlayerTurn();
             }
+            App.refreshScreen(gameConf, this);
         }
     }
 
