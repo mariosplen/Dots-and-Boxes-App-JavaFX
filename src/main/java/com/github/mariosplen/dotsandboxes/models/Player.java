@@ -36,4 +36,8 @@ public class Player {
         this.points = points;
     }
 
+    public void resetPoints() {
+        this.points = 0;
+    }
+
 }

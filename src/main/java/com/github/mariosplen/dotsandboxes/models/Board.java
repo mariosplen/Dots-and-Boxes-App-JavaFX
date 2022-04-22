@@ -136,7 +136,21 @@ public class Board {
                 changeCurrentPlayerTurn();
             }
             App.refreshScreen(gameConf, this);
+            if (gameOver()) {
+                App.gameOver(gameConf);
+            }
         }
+    }
+
+    private boolean gameOver() {
+        for (int[] square : squares) {
+            for (int i : square) {
+                if (i != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Player getCurrentPlayer() {

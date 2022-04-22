@@ -18,4 +18,10 @@ public record Conf(int size, Player player0, Player player1, boolean playerZeroP
         return playerZeroPlaysFirst;
     }
 
+    public void resetScore() {
+        getPlayer0().resetPoints();
+        getPlayer1().resetPoints();
+
+    }
+
 }
