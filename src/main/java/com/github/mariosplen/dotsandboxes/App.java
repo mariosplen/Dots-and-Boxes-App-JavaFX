@@ -30,6 +30,30 @@ public class App extends Application {
     static BorderPane borderPane;
     static Scene finalScene;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        stage = primaryStage;
+
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
+        Pane controller = fxmlLoader.load();
+
+        // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
+        controller.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+
+        controller.getStylesheets().add(String.valueOf(App.class.getResource("BootstrapFX.css")));
+
+        finalScene = applyScaling(controller);
+        stage.getIcons().add(new Image(String.valueOf(new File("assets/icon.png").toURI())));
+
+        stage.setScene(finalScene);
+        stage.show();
+
+    }
+
     public static void beginNewGame(Conf gameConf) {
 
         Board board = new Board(gameConf);
@@ -131,26 +155,6 @@ public class App extends Application {
                 stage.setScene(finalScene);
             }
         });
-
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
-        Pane controller = fxmlLoader.load();
-
-        // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
-        controller.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-
-        controller.getStylesheets().add(String.valueOf(App.class.getResource("BootstrapFX.css")));
-
-        finalScene = applyScaling(controller);
-        stage.getIcons().add(new Image(String.valueOf(new File("assets/icon.png").toURI())));
-
-        stage.setScene(finalScene);
-        stage.show();
 
     }
 
