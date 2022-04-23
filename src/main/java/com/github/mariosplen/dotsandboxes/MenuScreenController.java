@@ -95,7 +95,7 @@ public class MenuScreenController {
 
 
             // Start new game with game parameters
-            App.beginNewGame(new Conf(size, p0, p1, true));
+            Main.beginNewGame(new Conf(size, p0, p1, true));
         }
 
     }

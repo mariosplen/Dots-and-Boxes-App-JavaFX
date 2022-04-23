@@ -1,6 +1,6 @@
 package com.github.mariosplen.dotsandboxes.models;
 
-import com.github.mariosplen.dotsandboxes.App;
+import com.github.mariosplen.dotsandboxes.Main;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -135,9 +135,9 @@ public class Board {
             } else {
                 changeCurrentPlayerTurn();
             }
-            App.refreshScreen(gameConf, this);
+            Main.refreshScreen(gameConf, this);
             if (gameOver()) {
-                App.gameOver(gameConf);
+                Main.gameOver(gameConf);
             }
         }
     }
