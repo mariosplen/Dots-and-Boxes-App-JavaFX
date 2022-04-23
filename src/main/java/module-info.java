@@ -1,6 +1,7 @@
 module com.github.mariosplen.dotsandboxes {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.github.mariosplen.dotsandboxes to javafx.fxml;

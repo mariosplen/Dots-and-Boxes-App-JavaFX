@@ -13,11 +13,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class App extends Application {
@@ -37,7 +40,6 @@ public class App extends Application {
         borderPane = new BorderPane();
         borderPane.setCenter(boardPane);
         borderPane.setTop(scorePane);
-
 
         //Set BorderPane Size for the scalability to work
         if (gameConf.getSize() == 3) {
@@ -145,11 +147,11 @@ public class App extends Application {
         controller.getStylesheets().add(String.valueOf(App.class.getResource("BootstrapFX.css")));
 
         finalScene = applyScaling(controller);
+        stage.getIcons().add(new Image(String.valueOf(new File("assets/icon.png").toURI())));
 
         stage.setScene(finalScene);
         stage.show();
 
     }
-
 
 }

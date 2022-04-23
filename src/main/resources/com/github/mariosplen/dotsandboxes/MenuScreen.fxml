@@ -3,13 +3,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-            minWidth="-Infinity"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16"
             fx:controller="com.github.mariosplen.dotsandboxes.MenuScreenController">
     <top>
@@ -68,22 +66,6 @@
             </ColorPicker>
         </VBox>
     </right>
-    <bottom>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="20.0" BorderPane.alignment="CENTER">
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"/>
-                <RadioButton mnemonicParsing="false" selected="true">
-                    <toggleGroup>
-                        <ToggleGroup fx:id="themeSelectors"/>
-                    </toggleGroup>
-                </RadioButton>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                <ImageView fitHeight="70.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"/>
-                <RadioButton mnemonicParsing="false" toggleGroup="$themeSelectors"/>
-            </VBox>
-        </HBox>
-    </bottom>
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <Label text="Board Size"/>
@@ -92,4 +74,7 @@
             <Button fx:id="startGameButton" mnemonicParsing="false" text="Start"/>
         </VBox>
     </center>
+    <bottom>
+        <Circle fx:id="helpCircle" onMouseClicked="#bHelpPressed" radius="23.0" BorderPane.alignment="BOTTOM_RIGHT"/>
+    </bottom>
 </BorderPane>

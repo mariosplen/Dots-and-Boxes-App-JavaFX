@@ -1,40 +1,54 @@
 
-.button,.menu-button,.toggle-button,.split-menu-button {
-	-fx-font-size: 14;
-	-fx-background-radius: 4;
-	-fx-border-radius: 4;
-	-fx-pref-height: 30;
-	-fx-min-width: 30;
+.text-field
+{
+	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
 }
 
 
+
+.text-field {
+	-fx-pref-height: 30;
+}
+
+.text-field{
+	-fx-border-color: #cccccc;
+	-fx-background-color: white;
+	-fx-border-radius: 4;
+	-fx-background-radius: 4;
+	-fx-effect: innershadow(gaussian, transparent, 0, 0, 0, 0);
+}
+
+.text-field:focused{
+	-fx-border-color: #66afe9;
+	-fx-effect: dropshadow(gaussian, #66afe9, 10, 0, 0, 0);
+}
+
+
+.button {
+    -fx-font-size: 14;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-pref-height: 30;
+    -fx-min-width: 30;
+}
 
 /*bgcolor setting*/
-.color-picker,.date-picker > .arrow-button,
-.number-button,.left-arrow-button,.right-arrow-button,
-.button,.split-menu-button,.toggle-button,.menu-button,
-.font-menu-button, .split-menu-button > .label, .split-menu-button > .arrow-button {
-	-fx-background-color: white;
+.color-picker,
+.button {
+    -fx-background-color: white;
 }
 
-.color-picker,.date-picker > .arrow-button,
-.button,.menu-button,.toggle-button,.number-button,.left-arrow-button,.right-arrow-button,
-.font-menu-button,
-.split-menu-button > .label,.split-menu-button > .arrow-button {
-	-fx-border-color: #cccccc;
-	-fx-text-fill: #333333;
+.color-picker,
+.button {
+    -fx-border-color: #cccccc;
+    -fx-text-fill: #333333;
 }
 
-	/*hover state*/
+/*hover state*/
 .color-picker:hover,
-.date-picker:hover > .arrow-button,
-.combo-box:hover,.choice-box:hover,
-.number-button:hover,.left-arrow-button:hover,.right-arrow-button:hover,
-.button:hover,.menu-button:hover,.toggle-button:hover,
-.font-menu-button:hover,
-.split-menu-button > .label:hover, .split-menu-button > .arrow-button:hover {
-	-fx-background-color: #e6e6e6;
-	-fx-border-color: #acacac;
+.button:hover {
+    -fx-background-color: #e6e6e6;
+    -fx-border-color: #acacac;
 }
 
 
@@ -45,32 +59,42 @@
  ******************************************************************************/
 
 .radio-button {
-	-fx-label-padding: 0.0em 0.0em 0.1em 0.416667em; /* 0 0 0 5 */
-	-fx-text-fill: -fx-text-background-color;
-	-fx-padding: 0 0 .5 0;
+    -fx-label-padding: 0.0em 0.0em 0.1em 0.416667em;
+    /* 0 0 0 5 */
+    -fx-text-fill: -fx-text-background-color;
+    -fx-padding: 0 0 .5 0;
 }
-.radio-button > .radio,
-.radio-button:focused > .radio  {
-	-fx-border-color: #56c0e0;
-	-fx-border-radius: 1em;
-	-fx-background-radius: 1.0em; /* large value to make sure this remains circular */
-	-fx-padding: 1 2 3 2;
-	-fx-background-color: white;
+
+.radio-button>.radio,
+.radio-button:focused>.radio {
+    -fx-border-color: #56c0e0;
+    -fx-border-radius: 1em;
+    -fx-background-radius: 1.0em;
+    /* large value to make sure this remains circular */
+    -fx-padding: 1 2 3 2;
+    -fx-background-color: white;
 }
-.radio-button > .radio > .dot {
-	-fx-background-color: transparent;
-	-fx-background-radius: 1.0em; /* large value to make sure this remains circular */
-	-fx-padding: 0.333333em; /* 4 -- radius of the inner black dot when selected */
-	-fx-background-insets: 3 2 1 2;
+
+.radio-button>.radio>.dot {
+    -fx-background-color: transparent;
+    -fx-background-radius: 1.0em;
+    /* large value to make sure this remains circular */
+    -fx-padding: 0.333333em;
+    /* 4 -- radius of the inner black dot when selected */
+    -fx-background-insets: 3 2 1 2;
 }
-.radio-button:selected > .radio,.radio-button:hover > .radio {
-	-fx-fill-color: #56c0e0;
+
+.radio-button:selected>.radio,
+.radio-button:hover>.radio {
+    -fx-fill-color: #56c0e0;
 }
-.radio-button:pressed > .radio {
-	-fx-background-color: #50c0e2;
+
+.radio-button:pressed>.radio {
+    -fx-background-color: #50c0e2;
 }
-.radio-button:selected > .radio > .dot {
-	-fx-background-color: #56c0e0;
+
+.radio-button:selected>.radio>.dot {
+    -fx-background-color: #56c0e0;
 }
 
 
@@ -81,18 +105,21 @@
  ******************************************************************************/
 
 .slider .thumb {
-	-fx-background-color: #dad9da, white, #3fbadf;
-	-fx-background-insets: 0, 1, 5;
-	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.2), 5, 0.0 , 0, 0);
+    -fx-background-color: #dad9da, white, #3fbadf;
+    -fx-background-insets: 0, 1, 5;
+    -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.2), 5, 0.0, 0, 0);
 }
+
 .slider .thumb:hover {
-	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.4), 5, 0.0 , 0, 0);
+    -fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 0);
 }
+
 .slider .track {
-	-fx-background-color: #dad9da, white;
-	-fx-background-insets: -1, 0, 1;
-	-fx-pref-height: 5;
+    -fx-background-color: #dad9da, white;
+    -fx-background-insets: -1, 0, 1;
+    -fx-pref-height: 5;
 }
+
 .slider:vertical .track {
-	-fx-pref-width: 5;
+    -fx-pref-width: 5;
 }

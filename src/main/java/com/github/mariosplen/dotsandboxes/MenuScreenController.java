@@ -3,6 +3,8 @@ package com.github.mariosplen.dotsandboxes;
 import com.github.mariosplen.dotsandboxes.models.Conf;
 import com.github.mariosplen.dotsandboxes.models.Player;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -10,7 +12,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class MenuScreenController {
@@ -25,7 +31,7 @@ public class MenuScreenController {
     @FXML
     private Button startGameButton, p0NextButton, p0BackButton, p1NextButton, p1BackButton;
     @FXML
-    private Circle circleAvatar0, circleAvatar1;
+    private Circle circleAvatar0, circleAvatar1, helpCircle;
     private String playerOneName;
     private String playerTwoName;
     private Image playerOneAvatar;
@@ -37,6 +43,8 @@ public class MenuScreenController {
 
 
     public void initialize() {
+
+        helpCircle.setFill(new ImagePattern(new Image(String.valueOf(new File("assets/help.png").toURI()))));
 
         // Get images from folder
         images = new File("assets/icons").listFiles();
@@ -162,6 +170,11 @@ public class MenuScreenController {
     public void setAvatarHighlight() {
         circleAvatar0.setEffect(new DropShadow(+25d, 0d, +2d, playerOneColorPicker.getValue()));
         circleAvatar1.setEffect(new DropShadow(+25d, 0d, +2d, playerTwoColorPicker.getValue()));
+    }
+
+    public void bHelpPressed() throws URISyntaxException, IOException {
+        // WARNING DOESN'T WORK ON LINUX MACHINE!
+        Desktop.getDesktop().browse(new URI("https://en.wikipedia.org/wiki/Dots_and_Boxes"));
     }
 
 }
