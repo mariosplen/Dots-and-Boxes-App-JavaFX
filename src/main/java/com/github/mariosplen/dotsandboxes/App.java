@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 import java.io.File;
 
 
-public class Main extends Application {
+public class App extends Application {
 
     static Stage stage;
     static Scene scene;
@@ -38,13 +38,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MenuScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MenuScreen.fxml"));
         Pane controller = fxmlLoader.load();
 
         // Weird bug fix UNKNOWN CAUSE When under scaling appears wrong background color
         controller.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
-        controller.getStylesheets().add(String.valueOf(Main.class.getResource("BootstrapFX.css")));
+        controller.getStylesheets().add(String.valueOf(App.class.getResource("BootstrapFX.css")));
 
         finalScene = applyScaling(controller);
         stage.getIcons().add(new Image(String.valueOf(new File("assets/icon.png").toURI())));
