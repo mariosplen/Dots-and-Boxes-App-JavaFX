@@ -38,6 +38,5 @@ To set up and run the game, you will need to have the following installed:
 Dots and Boxes is a classic and simple game that can be enjoyed by players of all ages. This JavaFX offers a fun and challenging way to pass the time.
 
 - **Developed by:** Marios Plenchidis
-  - Role: Full Stack Developer
   - Contact: mariosplenchidis@gmail.com
   - [LinkedIn](https://www.linkedin.com/in/marios-p-12313a203/)
